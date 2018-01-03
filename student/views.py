@@ -9,13 +9,16 @@ from django.contrib.auth.decorators import login_required
 from django_datatables_view.base_datatable_view import BaseDatatableView
 from django.db.models import Count, Sum, Q, Case, Value, When, IntegerField
 
+
 # Create your views here.
 
 def home(request):
-	return render(request,'base.html')
+		return render(request,'base.html')
 
 def home_json(request):
-	return render(request,'student/home_json.html')
+    return render(request, 'student/home_json.html')
+
+		
 
 # Student JSON list filtering
 class student_list_json(BaseDatatableView):
@@ -91,7 +94,8 @@ class student_list_json(BaseDatatableView):
                 # item.course,
                 item.get_course_display(),
                 str(item.pk),
+                #reverse_lazy('student_detail',kwargs={'pk': str(item.pk)})
                 reverse_lazy('student_home'),
-            ])    
+            ])
             # print(json_data)
         return json_data
